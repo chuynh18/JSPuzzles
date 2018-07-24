@@ -216,5 +216,6 @@ console.log("expecting true: ", decide(containsUndefined1, containsUndefined2));
 console.log("expecting false: ", decide(containsUndefined1, containsUndefined3)); // false
 console.log("===========================");
 console.log("nested arrays containing NaN...");
-console.log("expecting true: ", decide(containsNaN1, containsNaN2)); // actually, false
+console.log("because NaN !== NaN, these will come out false, but I warn the user!");
+console.log("expecting false: ", decide(containsNaN1, containsNaN2)); // actually, false
 console.log("expecting false: ", decide(containsNaN1, containsNaN3)); // false
