@@ -48,7 +48,10 @@ const nestedArray3 = [
 const decide = function(input1, input2) {
     let match = true;
 
-    if (typeof input1 === "string" && typeof input2 === "string") {
+    if (typeof input1 !== typeof input2) {
+        return false;
+    }
+    else if (typeof input1 === "string" && typeof input2 === "string") {
         match = stringNumCompare(input1, input2);
     }
     else if (typeof input1 === "number" && typeof input2 === "number") {
