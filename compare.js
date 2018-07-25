@@ -1,5 +1,6 @@
 // ============= functionality =================
 
+// feed what you want to compare into this function
 const decide = function(input1, input2) {
     let match = true;
 
@@ -30,6 +31,7 @@ const decide = function(input1, input2) {
     return match;
 };
 
+// handles strings, numbers, undefined, NaN (will fail on NaN, but warn the user that NaN was received)
 const compare = function(input1, input2) {
     if (input1 !== input1 || input2 !== input2) {
         console.log("warning:  NaN was possibly compared.  Did you mean to pass NaN?");
@@ -44,6 +46,7 @@ const compare = function(input1, input2) {
     };
 };
 
+// handles arrays
 const arrayCompare = function(input1, input2) {
     let match = true;
 
@@ -63,6 +66,7 @@ const arrayCompare = function(input1, input2) {
     return match;
 };
 
+// handles objects
 const objCompare = function(input1, input2) {
     const keys1 = Object.keys(input1);
     const keys2 = Object.keys(input2);
@@ -92,13 +96,17 @@ const objCompare = function(input1, input2) {
 
 // ============= stuff to compare =================
 
+// 1 and 2 are always the same, anything else differs
+
 const string1 = "Here's a string.";
 const string2 = "Here's a string.";
-const string3 = "Here's a different string.";
+const string3 = "Here's a string. ";
+const string4 = "Here's a different string.";
 
 const array1 = [1, 2, 3];
 const array2 = [1, 2, 3];
 const array3 = [2, 4, 6];
+const array4 = [1, 2, 3, 4];
 
 const obj1 = {
     key1:  "this is a basic object"
@@ -209,9 +217,12 @@ const complexObj1 = {
         },
         nestedKey3: undefined
     },
-    key5: [{},{
-        thisIsGettingOutOfHand: [null, null, null]
-    }]
+    key5: [
+        {},
+        {
+            thisIsGettingOutOfHand: [null, null, null]
+        }
+    ]
 };
 const complexObj2 = {
     key1: "just a string",
@@ -225,9 +236,12 @@ const complexObj2 = {
         },
         nestedKey3: undefined
     },
-    key5: [{},{
-        thisIsGettingOutOfHand: [null, null, null]
-    }]
+    key5: [
+        {},
+        {
+            thisIsGettingOutOfHand: [null, null, null]
+        }
+    ]
 };
 const complexObj3 = {
     key1: "just a string",
@@ -241,9 +255,12 @@ const complexObj3 = {
         },
         nestedKey3: undefined
     },
-    key5: [{},{
-        thisIsGettingOutOfHand: [null, "", undefined]
-    }]
+    key5: [
+        {},
+        {
+            thisIsGettingOutOfHand: [null, "", undefined]
+        }
+    ]
 };
 
 // ============= tests =================
@@ -251,12 +268,14 @@ const complexObj3 = {
 console.log("basic strings...");
 console.log("expecting true: ", decide(string1, string2)); // true
 console.log("expecting false: ", decide(string1, string3)); // false
+console.log("expecting false: ", decide(string1, string4)); // false
 console.log("\n===========================\n");
 
 // Simple arrays
 console.log("basic arrays...");
 console.log("expecting true: ", decide(array1, array2)); // true
 console.log("expecting false: ", decide(array1, array3)); // false
+console.log("expecting false: ", decide(array1, array4)); // false
 console.log("\n===========================\n");
 
 // Simple objects
