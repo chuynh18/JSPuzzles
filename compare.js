@@ -7,6 +7,9 @@ const decide = function(input1, input2) {
     if (typeof input1 !== typeof input2) {
         return false;
     }
+    else if (typeof input1 === "boolean" && typeof input2 === "boolean") {
+        match = compare(input1, input2);
+    }
     // due to checking for matching types, I don't actually need to check the types of both inputs below
     else if (typeof input1 === "string" && typeof input2 === "string") {
         match = compare(input1, input2);
@@ -69,8 +72,8 @@ const arrayCompare = function(input1, input2) {
 
 // handles objects
 const objCompare = function(input1, input2) {
-    const keys1 = Object.keys(input1);
-    const keys2 = Object.keys(input2);
+    const keys1 = Array.from(Object.keys(input1)).sort();
+    const keys2 = Array.from(Object.keys(input2)).sort();
     let match = true;
 
     if (keys1.length !== keys2.length) {
@@ -208,7 +211,7 @@ const containsNaN3 = [
 
 const complexObj1 = {
     key1: "just a string",
-    key2: [1, 2, 3],
+    key2: [true, 1, 2, 3],
     key3: ["just an array ", "containing strings"],
     key4: {
         nestedKey1: "another object",
@@ -226,8 +229,14 @@ const complexObj1 = {
     ]
 };
 const complexObj2 = {
+    key5: [
+        {},
+        {
+            thisIsGettingOutOfHand: [null, null, null]
+        }
+    ],
+    key2: [true, 1, 2, 3],
     key1: "just a string",
-    key2: [1, 2, 3],
     key3: ["just an array ", "containing strings"],
     key4: {
         nestedKey1: "another object",
@@ -236,17 +245,11 @@ const complexObj2 = {
             nestednestedKey2: [3, 2, 1, 0, -1]
         },
         nestedKey3: undefined
-    },
-    key5: [
-        {},
-        {
-            thisIsGettingOutOfHand: [null, null, null]
-        }
-    ]
+    }
 };
 const complexObj3 = {
     key1: "just a string",
-    key2: [1, 2, 3],
+    key2: [true, 1, 2, 3],
     key3: ["just an array ", "containing strings"],
     key4: {
         nestedKey1: "another object",
