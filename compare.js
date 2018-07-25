@@ -7,9 +7,21 @@ const decide = function(input1, input2) {
     if (typeof input1 !== typeof input2) {
         return false;
     }
-    // due to checking for matching types, I don't actually need to check the types of both inputs below
+    else if (typeof input1 === "symbol") {
+        console.log("warning:  you attempted to compare symbols.  Symbols are supposed to be unique.");
+        return false;
+    }
+    // since I already checked that the input types match, I only need to check the type of one of the inputs
     else if (typeof input1 === "boolean" || typeof input1 === "string" || typeof input1 === "number") {
         match = compare(input1, input2);
+    }
+    else if (typeof input1 === "function") {
+        console.log("warning:  did you mean to pass a function for comparison?");
+
+        const input1ToString = input1.toString();
+        const input2ToString = input2.toString();
+
+        match = compare(input1ToString, input2ToString);
     }
     else if (input1 === null) {
         console.log("warning:  did you mean to pass null values for comparison?");
@@ -222,6 +234,8 @@ const complexObj1 = {
         }
     ]
 };
+
+// note the scrambled order of keys compared to complexObj1
 const complexObj2 = {
     key5: [
         {},
