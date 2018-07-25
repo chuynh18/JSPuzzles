@@ -1,7 +1,7 @@
 Various JavaScript Puzzles
 ==========================
 
-Or, if we're going to throw euphemisms out the window, `JavaScript Interview Questions`
+Or, if we're going to throw euphemisms out the window, this `README.md` should actually be titled `JavaScript Interview Questions`.
 
 compare.js
 ----------
@@ -15,7 +15,7 @@ Feed two items into the `decide` function to kick off the comparison.  This func
     * Edge case: I haven't written any special code to handle `NaN`.  Unfortunately, because `typeof NaN === "number"`, but `NaN !== NaN`, the presence of `NaN` will cause my code to return false, even if the items for comparison are otherwise the same.  The user will be warned that `NaN` was passed in for comparison, and so the `false` the user receives may be spurious.
 * type `function`:  coerced to a `string`, then handed off to `compare`.
 * `null` or type `undefined`:  handled by `compare`, but a warning is logged to the console.
-    *Note:  `null` is checked for explicitly, because `typeof null === "object"`
+    * Note:  `null` is checked for explicitly, because `typeof null === "object"`
 * type `array`:  handled by `arrayCompare`.  First checks the lengths of both inputs.  If they are unequal, returns false.  Otherwise, loops through the elements of the arrays and calls `decide` on each element.
 * type `object`:  handled by `objCompare`.  Starts by retrieving the keys for both input objects using `Object.keys()`.  Since this returns an array-like object, and since we can't guarantee the order of keys in an object, the array-like object is converted into an array via `Array.from()`, then we apply the `sort()` method.  This guarantees that we will now look at the keys for both objects in the same order.  We then use the same logic as in `arrayCompare` on the keys; if the arrays are the same, we return true and return false otherwise.  If the keys are identical, we then compare the values by calling `decide` on each value.
 
