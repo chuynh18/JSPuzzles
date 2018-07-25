@@ -7,25 +7,19 @@ const decide = function(input1, input2) {
     if (typeof input1 !== typeof input2) {
         return false;
     }
-    else if (typeof input1 === "boolean" && typeof input2 === "boolean") {
-        match = compare(input1, input2);
-    }
     // due to checking for matching types, I don't actually need to check the types of both inputs below
-    else if (typeof input1 === "string" && typeof input2 === "string") {
+    else if (typeof input1 === "boolean" || typeof input1 === "string" || typeof input1 === "number") {
         match = compare(input1, input2);
     }
-    else if (typeof input1 === "number" && typeof input2 === "number") {
-        match = compare(input1, input2);
-    }
-    else if (input1 === null && input2 === null) {
+    else if (input1 === null) {
         console.log("warning:  did you mean to pass null values for comparison?");
         match = compare(input1, input2);
     }
-    else if (typeof input1 === "undefined" && typeof input2 === "undefined") {
+    else if (typeof input1 === "undefined") {
         console.log("warning:  did you mean to pass undefined values for comparison?");
         match = compare(input1, input2);
     }
-    else if (Array.isArray(input1) && (Array.isArray(input2))) {
+    else if (Array.isArray(input1)) {
         match = arrayCompare(input1, input2);
     }
     else {
