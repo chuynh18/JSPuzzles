@@ -7,6 +7,7 @@ const decide = function(input1, input2) {
     if (typeof input1 !== typeof input2) {
         return false;
     }
+    // due to checking for matching types, I don't actually need to check the types of both inputs below
     else if (typeof input1 === "string" && typeof input2 === "string") {
         match = compare(input1, input2);
     }
