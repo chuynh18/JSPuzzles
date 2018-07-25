@@ -42,7 +42,7 @@ const decide = function(input1, input2) {
     return match;
 };
 
-// handles strings, numbers, undefined, NaN (will fail on NaN, but warn the user that NaN was received)
+// handles bools, strings, numbers, functions, undefined, NaN (will fail on NaN, but warn the user that NaN was received)
 const compare = function(input1, input2) {
     if (input1 !== input1 || input2 !== input2) {
         console.log("warning:  NaN was possibly compared.  Did you mean to pass NaN?");
