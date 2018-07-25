@@ -17,6 +17,7 @@ const decide = function(input1, input2) {
     }
     else if (typeof input1 === "function") {
         console.log("warning:  did you mean to pass a function for comparison?");
+        console.log("warning:  false negatives are very possible")
 
         const input1ToString = input1.toString();
         const input2ToString = input2.toString();
@@ -275,6 +276,12 @@ const complexObj3 = {
     ]
 };
 
+// complexObj1 and complexObj3 are different objects because their values differ slightly, but the keys are the same.  Therefore, Object.keys(complexObj1) === Object.keys(complexObj3)
+// even though complexObj1 and complexObj2 are the same object, their keys are in different order.  Object.keys(complexObj1) !== Object.keys(complexObj1); this is desired behavior because these are array-like so we should treat them as arrays instead of as objects
+const arrayLike1 = Object.keys(complexObj1);
+const arrayLike2 = Object.keys(complexObj3);
+const arrayLike3 = Object.keys(complexObj2);
+
 // ============= tests =================
 // Simple strings
 console.log("basic strings...");
@@ -319,3 +326,9 @@ console.log("\n===========================\n");
 console.log("messy objects...");
 console.log("expecting true: ", decide(complexObj1, complexObj2)); // true
 console.log("expecting false: ", decide(complexObj1, complexObj3)); // false
+console.log("\n===========================\n");
+
+// Array-like objects.  Note the behavior here, especially in comparison to when we compared the objects themselves!
+console.log("array-like objects...");
+console.log("expecting true: ", decide(arrayLike1, arrayLike2)); // true, keys are the same
+console.log("expecting false: ", decide(arrayLike1, arrayLike3)); // false, keys are in different order
