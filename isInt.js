@@ -7,6 +7,9 @@
 
 // returns false for non-integers
 
+// not sure how to handle numbers such as 0.00 or 12.0
+// Then again, since the toFixed() method returns a string, perhaps JavaScript can't handle sig figs
+
 const isInt = function(input) {
     if (typeof input === "number") {
         if (input % 1 === 0) {
