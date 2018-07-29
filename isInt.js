@@ -43,11 +43,7 @@ const isInt = function(input) {
         }
 
         for (let i = input.length - 1; i >= negativeAdjustment; i--) {
-            reversedInput += input[i];
-        }
-
-        for (let i = 0; i < reversedInput.length; i++) {
-            outputInt += reversedInput[i] * 10**i;
+            outputInt += input[i] * 10**(input.length - 1 - i);
         }
 
         if (!positive) {
@@ -62,19 +58,25 @@ const isInt = function(input) {
 
 // ==========================
 
-console.log(isInt(420)); // 420
-console.log(isInt("420")); // 420
-console.log(isInt(-420)); // -420
-console.log(isInt("-123")); // -123
-console.log(isInt("-983245798234")); // -983245798234
-console.log(isInt("428123a")); // false
-console.log(isInt(420.69)); // false
-console.log(isInt("Tasty Indian Pizza")); // false
-console.log(isInt("543.1")); // false
-console.log(isInt([1])); // false
-console.log(isInt({butThisIsAnInt: 0})); // false
-console.log(isInt(true)); // false
-console.log(isInt(null)); // false
-console.log(isInt(undefined)); // false
-console.log(isInt(Infinity)); // 
-console.log(isInt(NaN)); // false
+const integers = [420, "-420", -420, "-420", "-298747248923438"];
+const notIntegers = ["8203324a", 420.42, "Tasty Indian Pizza", "143.1", [1], {butThisIsAnInt: 0}, true, false, null, undefined, Infinity, NaN];
+
+const runTests = function(input) {
+    const failingTests = [];
+
+    for (let i = 0; i < input.length; i++) {
+        if (typeof isInt(input[i]) !== arguments[1]) {
+            failingTests[failingTests.length] = i;
+        }
+    }
+
+    if (failingTests.length !== 0) {
+        console.log("Failed tests: ", failingTests);
+    }
+    else {
+        console.log(`All ${arguments[1]} tests passed successfully.`);
+    }
+}
+
+runTests(integers, "number");
+runTests(notIntegers, "boolean");
