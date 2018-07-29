@@ -67,4 +67,4 @@ const sumUnlimited = function(arg) {
 }
 
 console.log(sumUnlimited(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 55
-console.log(sumUnlimited(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)("STOP!  HAMMERTIME")); // 55 - need to end with a non-number
+console.log(sumUnlimited(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)("STOP!  HAMMERTIME")); // 55 - need to end with a non-number, though to be fair, () would have sufficed
