@@ -20,7 +20,6 @@ const isInt = function(input) {
     } else if (typeof input === "string") {
         const validChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         let positive = true;
-        let reversedInput = "";
         let negativeAdjustment = 0;
         let outputInt = 0
 
@@ -29,6 +28,7 @@ const isInt = function(input) {
                 return false;
             } else {
                 positive = false;
+                negativeAdjustment = 1;
             }
         }
 
@@ -38,11 +38,8 @@ const isInt = function(input) {
             }
         }
 
-        if (!positive) {
-            negativeAdjustment = 1;
-        }
-
         for (let i = input.length - 1; i >= negativeAdjustment; i--) {
+            // implicit type coercion of input[i] from string to number due to multiplication operation
             outputInt += input[i] * 10**(input.length - 1 - i);
         }
 
@@ -55,6 +52,13 @@ const isInt = function(input) {
         return false;
     }
 }
+
+// as an aside, it annoys me that type coercion behavior differs amongst the arithmetic operators
+// it's well known that "4" + 2 === "42", which is a string since + acts as concatenate on strings
+// however...
+// "4" * 2 === 8 (a number)
+// "4" - 2 === 2 (a number)
+// "4" / 2 === 2 (a number)
 
 // ==========================
 
