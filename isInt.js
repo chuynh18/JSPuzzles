@@ -21,7 +21,7 @@ const isInt = function(input) {
         const validChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         let positive = true;
         let negativeAdjustment = 0;
-        let outputInt = 0
+        let outputInt = 0;
 
         if (validChars.indexOf(input[0]) === -1) {
             if (input[0] !== "-") {
@@ -62,7 +62,7 @@ const isInt = function(input) {
 
 // ==========================
 
-const integers = [420, "-420", -420, "-420", "-298747248923438"];
+const integers = [420, "-420", -420, "-420", "-298747248923438", 0];
 const notIntegers = ["8203324a", 420.42, "Tasty Indian Pizza", "143.1", [1], {butThisIsAnInt: 0}, true, false, null, undefined, Infinity, NaN];
 
 const runTests = function(input) {
@@ -70,6 +70,10 @@ const runTests = function(input) {
 
     for (let i = 0; i < input.length; i++) {
         if (typeof isInt(input[i]) !== arguments[1]) {
+            failingTests[failingTests.length] = i;
+        }
+
+        if (arguments[1] === "number" && isInt(input[i]) !== Number(input[i])) {
             failingTests[failingTests.length] = i;
         }
     }
